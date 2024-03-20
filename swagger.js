@@ -5,7 +5,7 @@ const doc = {
         title: 'D&D Characters and Deities Api',
         description: 'Api for Characters and Deities from Forgotten Realms Lore'
     },
-    host: 'https://cse-341-project2-mgw5.onrender.com/',
+    host: 'cse-341-project2-mgw5.onrender.com/',
     schemes: ['https']
 };
 
