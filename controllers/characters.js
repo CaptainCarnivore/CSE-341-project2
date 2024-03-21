@@ -15,12 +15,9 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['Characters']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid character id to find a character.');
-      }
 
     const characterId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('characters').find({ _id: characterId}).catch(error => console.error('error', error));;
+    const result = await mongodb.getDatabase().db().collection('characters').find({ _id: characterId});
     result.toArray().then((characters) => {
         if (characters.length == 0) {
             res.status(404).json(`Resource not found with id ${characterId}`)
@@ -54,9 +51,6 @@ const createCharacter = async (req, res) => {
 
 const updateCharacter = async (req, res) => {
     //#swagger.tags=['Characters']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid character id to find a character.');
-      }
     const characterId = new ObjectId(req.params.id);
     const character = {
         firstName: req.body.firstName,
@@ -81,9 +75,6 @@ const updateCharacter = async (req, res) => {
 
 const deleteCharacter = async (req, res) => {
     //#swagger.tags=['Characters']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid character id to find a character.');
-      }
     const characterId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('characters').deleteOne({ _id:characterId});
     if (response.deletedCount > 0) {

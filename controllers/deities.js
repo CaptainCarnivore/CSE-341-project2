@@ -15,9 +15,6 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['Deities']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid deity id to find a deity.');
-      }
 
     const deityId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('deities').find({ _id: deityId});
@@ -56,9 +53,6 @@ const createDeity = async (req, res) => {
 
 const updateDeity = async (req, res) => {
     //#swagger.tags=['Deities']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid deity id to find a deity.');
-      }
     const deityId = new ObjectId(req.params.id);
     const deity = {
         name: req.body.name,
@@ -84,9 +78,6 @@ const updateDeity = async (req, res) => {
 
 const deleteDeity = async (req, res) => {
     //#swagger.tags=['Deities']
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid deity id to find a deity.');
-      }
     const deityId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('deities').deleteOne({ _id:deityId});
     if (response.deletedCount > 0) {

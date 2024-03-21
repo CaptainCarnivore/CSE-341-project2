@@ -1,4 +1,19 @@
 const validator = require('../helpers/validate');
+const ObjectId = require('mongodb').ObjectId;
+
+const validObjectId = (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+    if (id.length != 24) {
+      res.status(400).json('ID must be a 24 character hex string, 12 byte Uint8Array, or an integer.')
+    } else {
+      console.log(id.length)
+      console.log('id passed validation');
+      next();
+    }
+
+}
+
 
 const saveCharacter = (req, res, next) => {
   const validationRule = {
@@ -56,5 +71,5 @@ const saveDeity = (req, res, next) => {
   };
 
 module.exports = {
-  saveCharacter, saveDeity
+  saveCharacter, saveDeity, validObjectId
 };
