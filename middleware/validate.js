@@ -3,15 +3,21 @@ const ObjectId = require('mongodb').ObjectId;
 
 const validObjectId = (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
-    if (id.length != 24) {
-      res.status(400).json('ID must be a 24 character hex string, 12 byte Uint8Array, or an integer.')
+  const validationRule = {
+    id: 'hex|size:24'
+  }
+  validator(req.params, validationRule, {size: 'ID must be a 24 character hex string.', hex:  'ID must be a 24 character hex string.'}, (err, status) => {
+    console.log(status);
+    if (!status) {
+      res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
     } else {
-      console.log(id.length)
-      console.log('id passed validation');
       next();
     }
-
+  });
 }
 
 

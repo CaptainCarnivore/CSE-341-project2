@@ -8,7 +8,6 @@ const getAll = async (req, res) => {
         if (deities.length == 0) {
             res.status(404).json(`Resources not found!`)
         }
-        res.setHeader('Content-Typer', 'application/json');
         res.status(200).json(deities);
     });
 };
@@ -22,7 +21,6 @@ const getSingle = async (req, res) => {
         if (deities.length == 0) {
             res.status(404).json(`Resource not found with id ${deityId}`)
         }
-        res.setHeader('Content-Type', 'application/json');
         res.status(200).json(deities[0]);
     });
 }; 
