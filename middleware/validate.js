@@ -50,7 +50,7 @@ const saveCharacter = (req, res, next) => {
 
 const saveDeity = (req, res, next) => {
     const validationRule = {
-        name: 'required|string',
+      name: 'required|string',
 	    alignment: 'required|string',
 	    domains: 'required|array',
 	    portfolio: 'required|array',
